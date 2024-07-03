@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        /* 全局样式重置 */
+        *{
+            margin: 0;
+            padding: 0;
+            font-size: 18px;
+            box-sizing: border-box;
+        }
+        /* 设置body的样式，使内容居中 */
+        body{
+            display: flex;
+            height: 100vh;
+            justify-content: center;
+            align-items: center;
+        }
+        /* 容器样式 */
+        .container{
+            display: block;
+            width: 320px;
+            background-color: antiquewhite;
+            border: 1px solid #333;
+        }
+        /* 答案显示框样式 */
+        .answer{
+            border: none;
+            width: 100%;
+            height: 5rem;
+            background-color: #333;
+            color: #d7ff5f;
+            font-size: 60px;
+            padding: 0 10px;
+            box-sizing: border-box;
+        }
+        /* 清除和等号按钮样式 */
+        .clear, .equal{
+            width: 160px;
+            background-color: #585858;
+            cursor: pointer;
+        }
+        /* 鼠标悬停在清除和等号按钮上时的样式 */
+        .clear:hover, .equal:hover{
+            background-color: blueviolet;
+        }
+        /* 清除和等号按钮被点击时的样式 */
+        .clear:active, .equal:active{
+            background-color: darkmagenta;
+        }
+        /* 普通按钮样式 */
+        .buttons{
+            width: 80px;
+            cursor: pointer;
+        }
+        /* 鼠标悬停在普通按钮上时的样式 */
+        .buttons:hover{
+            background-color: #ddd;
+        }
+        /* 普通按钮被点击时的样式 */
+        .buttons:active{
+            background-color: #bbb;
+        }
+        /* 输入框样式 */
+        input{
+            margin-right: -5px;
+            height: 50px;
+            border: 1px solid #333;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <form name="form" class="form-one">
+            <!-- 显示答案的输入框 -->
+            <input type="text" id="result" name="answer" class="answer">
+            <br>
+            <!-- 清除、删除和除号按钮 -->
+            <input type="button" value="AC" onclick="clearScreen()" class="clear">
+            <input type="button" value="Del" onclick="del()" class="buttons">
+            <input type="button" value="/" onclick="display('/')" class="buttons">
+            <br>
+            <!-- 数字1, 2, 3和乘号按钮 -->
+            <input type="button" value="1" onclick="display('1')" class="buttons">
+            <input type="button" value="2" onclick="display('2')" class="buttons">
+            <input type="button" value="3" onclick="display('3')" class="buttons">
+            <input type="button" value="*" onclick="display('*')" class="buttons">
+            <br>
+            <!-- 数字4, 5, 6和加号按钮 -->
+            <input type="button" value="4" onclick="display('4')" class="buttons">
+            <input type="button" value="5" onclick="display('5')" class="buttons">
+            <input type="button" value="6" onclick="display('6')" class="buttons">
+            <input type="button" value="+" onclick="display('+')" class="buttons">
+            <br>
+            <!-- 数字7, 8, 9和减号按钮 -->
+            <input type="button" value="7" onclick="display('7')" class="buttons">
+            <input type="button" value="8" onclick="display('8')" class="buttons">
+            <input type="button" value="9" onclick="display('9')" class="buttons">
+            <input type="button" value="-" onclick="display('-')" class="buttons">
+            <br>
+            <!-- 小数点、数字0和等号按钮 -->
+            <input type="button" value="." onclick="display('.')" class="buttons">
+            <input type="button" value="0" onclick="display('0')" class="buttons">
+            <input type="button" value="=" onclick="giveAns('=')" class="equal">
+        </form>
+    </div>
+    <script>
+        // 清除屏幕内容
+        function clearScreen() {
+            document.getElementById("result").value = ""; 
+        }
+        
+        // 显示点击的值
+        function display(value){
+            document.getElementById("result").value += value;
+        }
+        
+        // 计算并显示答案
+        function giveAns(){
+            var a = document.getElementById("result").value;
+            var b = eval(a);
+            document.getElementById("result").value = b;
+        }
+        
+        // 删除最后一个字符
+        function del(){
+            document.form.answer.value = document.form.answer.value.substr(0, form.answer.value.length - 1); 
+        }
+    </script>
+</body>
+</html>
