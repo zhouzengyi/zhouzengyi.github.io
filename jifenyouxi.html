@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>点击计分游戏</title>
+    <style>
+        /* 设置body的样式，使内容居中显示 */
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            background-color: #f0f0f0;
+            font-family: Arial, sans-serif;
+        }
+
+        /* 设置游戏容器的样式 */
+        .game-container {
+            text-align: center;
+            background-color: #fff;
+            padding: 20px;
+            border: 1px solid #ccc;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+
+        /* 设置按钮的样式 */
+        button {
+            padding: 10px 20px;
+            font-size: 16px;
+            cursor: pointer;
+            border: none;
+            border-radius: 5px;
+            background-color: #007bff;
+            color: #fff;
+            transition: background-color 0.3s;
+        }
+
+        /* 设置按钮悬停时的背景色 */
+        button:hover {
+            background-color: #0056b3;
+        }
+    </style>
+</head>
+<body>
+    <div class="game-container">
+        <h1>点击计分游戏</h1>
+        <p>计分：<span id="score">0</span></p> <!-- 显示当前得分 -->
+        <button id="click-button">点击我！</button> <!-- 游戏按钮 -->
+        <p>剩余时间：<span id="time">10</span>秒</p> <!-- 显示剩余时间 -->
+    </div>
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            // 获取HTML元素
+            const clickButton = document.getElementById('click-button');
+            const scoreDisplay = document.getElementById('score');
+            const timeDisplay = document.getElementById('time');
+
+            // 初始化变量
+            let score = 0; // 当前得分
+            let time = 10; // 剩余时间（秒）
+            let gameActive = false; // 游戏是否进行中
+            let timer; // 计时器
+
+            // 点击按钮时增加得分
+            clickButton.addEventListener('click', () => {
+                if (!gameActive) return; // 如果游戏未开始，则不计分
+                score++;
+                scoreDisplay.textContent = score; // 更新显示得分
+            });
+
+            // 开始游戏的函数
+            const startGame = () => {
+                gameActive = true;
+                score = 0; // 重置得分
+                scoreDisplay.textContent = score; // 显示重置后的得分
+                time = 10; // 重置时间
+                timeDisplay.textContent = time; // 显示重置后的时间
+                // 每秒减少剩余时间
+                timer = setInterval(() => {
+                    time--;
+                    timeDisplay.textContent = time; // 更新显示时间
+                    if (time <= 0) { // 时间结束时
+                        clearInterval(timer); // 清除计时器
+                        gameActive = false; // 设置游戏为未进行中
+                        alert(`游戏结束！您的得分是 ${score}`); // 显示游戏结束信息
+                    }
+                }, 1000);
+            };
+
+            // 点击按钮时，如果游戏未开始则开始游戏
+            clickButton.addEventListener('click', () => {
+                if (!gameActive) {
+                    startGame();
+                }
+            });
+        });
+    </script>
+</body>
+</html>
